@@ -76,6 +76,9 @@ upgrade_openssh() {
 
 More information please refer `build-RPMs-OpenSSH-CentOS.sh` script.
 
+## Problem
+On aarch64, random occur (core dumped) dnf install
+
 The [release page](https://github.com/Junyangz/upgrade-openssh-centos/releases) has some RPMs that I built, feel free to use it.
 
 ## Reference
