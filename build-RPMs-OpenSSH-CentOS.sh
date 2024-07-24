@@ -48,7 +48,8 @@ usage() {
 build_RPMs() {
     local output_rpm_dir="${1}"
     if [[ $(rpm --eval '%{centos_ver}') = 8 ]]; then
-        dnf install -y wget dnf-plugins-core epel-release && dnf config-manager --set-enabled PowerTools
+        dnf install -y dnf-plugins-core epel-release && subscription-manager repos --enable codeready-builder-for-rhel-8-x86_64-rpms
+        dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
         dnf install -y wget pam-devel rpm-build rpmdevtools zlib-devel openssl-devel krb5-devel gcc wget libX11-devel gtk2-devel libXt-devel perl perl-devel imake
     else
         yum install -y wget pam-devel rpm-build rpmdevtools zlib-devel openssl-devel krb5-devel gcc wget libx11-dev gtk2-devel libXt-devel imake
@@ -111,7 +112,8 @@ main() {
     local upgrade_now=""
     local install_only=""
     # rhel_version=$(rpm -q --queryformat '%{VERSION}' centos-release)
-    rhel_version=$(rpm -q --queryformat '%{RELEASE}' passwd|awk -F'.' '{print $NF}'|sed 's/el//g')
+    # rhel_version=$(rpm -q --queryformat '%{RELEASE}' passwd|awk -F'.' '{print $NF}'|sed 's/el//g')
+    rhel_version=$(rpm --eval '%{centos_ver}')
 
     while [[ "$#" -gt 0 ]]; do
         opt="$1"
