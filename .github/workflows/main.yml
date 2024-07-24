@@ -1,4 +1,4 @@
-name: android my-tv build
+name: openssh
 
 on:
   workflow_dispatch:
