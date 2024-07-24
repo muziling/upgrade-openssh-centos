@@ -59,8 +59,10 @@ build_RPMs() {
         dnf install -y libX11-devel gtk2-devel
         echo dnff5555
         dnf install -y libXt-devel perl perl-devel
-        wget https://repo.almalinux.org/almalinux/8/PowerTools/x86_64/os/Packages/imake-1.0.7-11.el8.x86_64.rpm
-        dnf localinstall imake-1.0.7-11.el8.x86_64.rpm -y
+        aarch=$(arch)
+        echo $aarch
+        wget https://repo.almalinux.org/almalinux/8/PowerTools/aarch64/os/Packages/imake-1.0.7-11.el8.$aarch.rpm
+        dnf localinstall imake-1.0.7-11.el8.$aarch.rpm -y
     else
         yum install -y pam-devel rpm-build rpmdevtools zlib-devel openssl-devel krb5-devel gcc wget libx11-dev gtk2-devel libXt-devel imake
     fi
@@ -86,7 +88,8 @@ build_RPMs() {
     sed -i -e "/check-files/ s/^#*/#/" /usr/lib/rpm/macros
 
     rpmbuild -ba openssh.spec
-    cd /root/rpmbuild/RPMS/x86_64/
+    aarch=$(arch)
+    cd /root/rpmbuild/RPMS/$aarch/
     tar zcvf ${output_rpm_dir}/openssh-${version}-RPMs.el${rhel_version}.tar.gz openssh*
     rm -rf ~/rpmbuild ~/openssh-${version}
 }
