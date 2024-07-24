@@ -20,7 +20,10 @@ jobs:
           run: |
             mkdir /rpmoutput
             curl https://raw.githubusercontent.com/muziling/upgrade-openssh-centos/master/build-RPMs-OpenSSH-CentOS.sh -o build-RPMs-OpenSSH-CentOS.sh
+            ls -l
+            echo begin build script
             bash build-RPMs-OpenSSH-CentOS.sh --version 9.8p1 --output_rpm_dir /rpmoutput
+            echo end build script
 
       - name: Upload App To Artifact
         uses: actions/upload-artifact@v3
