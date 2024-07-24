@@ -14,7 +14,7 @@ jobs:
         id: runcmd
         with:
           arch: aarch64
-          distro: centos8
+          distro: alpine_latest
 
           # Set an output parameter `uname` for use in subsequent steps
           run: |
