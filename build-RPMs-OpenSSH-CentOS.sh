@@ -142,22 +142,22 @@ main() {
             ;;
         esac
     done
-
+echo 11111
     if [[ -z ${version} ]]; then
         usage
         exit 1
     fi
-
+echo 222222
     if [[ ! -z ${output_rpm_dir} ]] && [[ ! -d "${output_rpm_dir}" ]]; then
         mkdir -p ${output_rpm_dir}
     fi
-
+echo 33333
     local temp_dir="$(mktemp -d)"
     trap "rm -rf ${temp_dir}" EXIT
     pushd "${temp_dir}"
 
     output_dir=${output_rpm_dir:-${temp_dir}}
-
+echo 44444
     if [[ ! -z ${install_only} ]] && [[ ! -z ${output_rpm_dir} ]]; then
         upgrade_openssh "${output_dir}"
         exit
