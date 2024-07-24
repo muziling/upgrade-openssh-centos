@@ -28,7 +28,7 @@
 #     the {7.9p1,8.0p1,8.1p1,8.2p1,8.3p1}.
 #   output_rpm_dir: The output directory for rpm package to place.
 #   upgrade_now: Whether install upgrade rpms now, yes or no.
-set -e
+# set -e
 
 if [[ $EUID -ne 0 ]]; then
     echo "Please run as root"
@@ -106,14 +106,15 @@ upgrade_openssh() {
 
 main() {
 echo begin main
+rpm -q --queryformat '%{VERSION}' centos-release
+echo a00000000
     # Parse arguments
     local version="8.3p1"
     local output_rpm_dir=""
     local upgrade_now=""
     local install_only=""
     rhel_version=$(rpm -q --queryformat '%{VERSION}' centos-release)
-echo 0000
-echo $rhel_version
+
     while [[ "$#" -gt 0 ]]; do
         opt="$1"
         case "${opt}" in
