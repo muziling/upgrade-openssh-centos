@@ -29,12 +29,12 @@
 #   output_rpm_dir: The output directory for rpm package to place.
 #   upgrade_now: Whether install upgrade rpms now, yes or no.
 set -e
-
+echo ssss
 if [[ $EUID -ne 0 ]]; then
     echo "Please run as root"
     exit 1
 fi
-
+echo dddddd
 die() {
     echo >&2 "$@"
     exit 1
