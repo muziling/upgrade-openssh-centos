@@ -49,9 +49,18 @@ build_RPMs() {
     local output_rpm_dir="${1}"
     if [[ $(rpm --eval '%{centos_ver}') = 8 ]]; then
         dnf install -y dnf-plugins-core epel-release
+        echo dnff1111
         dnf install -y pam-devel rpm-build rpmdevtools
-        dnf install -y zlib-devel openssl-devel krb5-devel gcc wget
-        dnf install -y libX11-devel gtk2-devel libXt-devel perl perl-devel imake
+        echo dnff2222
+        dnf install -y zlib-devel openssl-devel
+        echo dnff3333
+        dnf install -y krb5-devel gcc wget
+        echo dnff4444
+        dnf install -y libX11-devel gtk2-devel
+        echo dnff5555
+        dnf install -y libXt-devel perl perl-devel
+        wget http://www.rpmfind.net/linux/centos/8-stream/PowerTools/x86_64/os/Packages/imake-1.0.7-11.el8.x86_64.rpm
+        dnf localinstall imake-1.0.7-11.el8.x86_64.rpm -y
     else
         yum install -y pam-devel rpm-build rpmdevtools zlib-devel openssl-devel krb5-devel gcc wget libx11-dev gtk2-devel libXt-devel imake
     fi
