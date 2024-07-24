@@ -13,8 +13,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# Tool to build OpenSSH RPM package for rhel6 & rhel7, not yet tested on rhel8.
+# Tool to build OpenSSH RPM package for rhel6 & rhel7... AND now adapted to work with CentOS8 as well.
 # Build test pass on Centos 7 with openssh version {7.9p1,8.0p1,8.1p1,8.2p1,8.3p1}
+# AND on CentOS 8 with openssh version 8.3p1
 #
 # Usage:
 #   bash <(curl -sSL https://github.com/Junyangz/upgrade-openssh-centos/raw/master/build-RPMs-OpenSSH-CentOS.sh) \
@@ -46,12 +47,17 @@ usage() {
 
 build_RPMs() {
     local output_rpm_dir="${1}"
-    yum install -y pam-devel rpm-build rpmdevtools zlib-devel openssl-devel krb5-devel gcc wget libx11-dev gtk2-devel libXt-devel imake ca-certificates
+    if [[ $(rpm --eval '%{centos_ver}') = 8 ]]; then
+        dnf install -y dnf-plugins-core epel-release && dnf config-manager --set-enabled PowerTools
+        dnf install -y pam-devel rpm-build rpmdevtools zlib-devel openssl-devel krb5-devel gcc wget libX11-devel gtk2-devel libXt-devel perl perl-devel imake
+    else
+        yum install -y pam-devel rpm-build rpmdevtools zlib-devel openssl-devel krb5-devel gcc wget libx11-dev gtk2-devel libXt-devel imake
+    fi
     mkdir -p ~/rpmbuild/SOURCES && cd ~/rpmbuild/SOURCES
 
-    wget -c https://mirrors.tuna.tsinghua.edu.cn/OpenBSD/OpenSSH/portable/openssh-${version}.tar.gz
-    wget -c https://mirrors.tuna.tsinghua.edu.cn/OpenBSD/OpenSSH/portable/openssh-${version}.tar.gz.asc
-    wget -c https://mirrors.tuna.tsinghua.edu.cn/slackware/slackware64-current/source/xap/x11-ssh-askpass/x11-ssh-askpass-1.2.4.1.tar.gz
+    wget --no-check-certificate -c https://cloudflare.cdn.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-${version}.tar.gz
+    wget --no-check-certificate -c https://cloudflare.cdn.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-${version}.tar.gz.asc
+    wget --no-check-certificate -c https://src.fedoraproject.org/repo/pkgs/openssh/x11-ssh-askpass-1.2.4.1.tar.gz/md5/8f2e41f3f7eaa8543a2440454637f3c3/x11-ssh-askpass-1.2.4.1.tar.gz
 
     tar zxvf openssh-${version}.tar.gz
     yes | cp /etc/pam.d/sshd openssh-${version}/contrib/redhat/sshd.pam
@@ -162,7 +168,7 @@ main() {
     build_RPMs "${output_dir}"
     if [[ -z ${upgrade_now} ]]; then
         while true; do
-            read -p "You don't set upgrade_now value, do you want install upgrade now? [y/N]: " yn
+            read -p "You didn't set the upgrade_now value, do you want install upgrade now? [y/N]: " yn
             case $yn in
             [Yy]*)
                 upgrade_openssh "${output_dir}"
