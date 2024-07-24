@@ -48,10 +48,10 @@ usage() {
 build_RPMs() {
     local output_rpm_dir="${1}"
     if [[ $(rpm --eval '%{centos_ver}') = 8 ]]; then
-        dnf install -y dnf-plugins-core epel-release && dnf config-manager --set-enabled PowerTools
-        dnf install -y pam-devel rpm-build rpmdevtools zlib-devel openssl-devel krb5-devel gcc wget libX11-devel gtk2-devel libXt-devel perl perl-devel imake
+        dnf install -y wget dnf-plugins-core epel-release && dnf config-manager --set-enabled PowerTools
+        dnf install -y wget pam-devel rpm-build rpmdevtools zlib-devel openssl-devel krb5-devel gcc wget libX11-devel gtk2-devel libXt-devel perl perl-devel imake
     else
-        yum install -y pam-devel rpm-build rpmdevtools zlib-devel openssl-devel krb5-devel gcc wget libx11-dev gtk2-devel libXt-devel imake
+        yum install -y wget pam-devel rpm-build rpmdevtools zlib-devel openssl-devel krb5-devel gcc wget libx11-dev gtk2-devel libXt-devel imake
     fi
     mkdir -p ~/rpmbuild/SOURCES && cd ~/rpmbuild/SOURCES
 
@@ -105,15 +105,13 @@ upgrade_openssh() {
 }
 
 main() {
-echo begin main
-rpm -q --queryformat '%{VERSION}' centos-release
-echo a00000000
     # Parse arguments
     local version="8.3p1"
     local output_rpm_dir=""
     local upgrade_now=""
     local install_only=""
-    rhel_version=$(rpm -q --queryformat '%{VERSION}' centos-release)
+    # rhel_version=$(rpm -q --queryformat '%{VERSION}' centos-release)
+    rhel_version=$(rpm -q --queryformat '%{RELEASE}' passwd|awk -F'.' '{print $NF}'|sed 's/el//g')
 
     while [[ "$#" -gt 0 ]]; do
         opt="$1"
@@ -145,22 +143,22 @@ echo a00000000
             ;;
         esac
     done
-echo 11111
+
     if [[ -z ${version} ]]; then
         usage
         exit 1
     fi
-echo 222222
+
     if [[ ! -z ${output_rpm_dir} ]] && [[ ! -d "${output_rpm_dir}" ]]; then
         mkdir -p ${output_rpm_dir}
     fi
-echo 33333
+
     local temp_dir="$(mktemp -d)"
     trap "rm -rf ${temp_dir}" EXIT
     pushd "${temp_dir}"
 
     output_dir=${output_rpm_dir:-${temp_dir}}
-echo 44444
+
     if [[ ! -z ${install_only} ]] && [[ ! -z ${output_rpm_dir} ]]; then
         upgrade_openssh "${output_dir}"
         exit
