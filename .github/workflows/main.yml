@@ -23,7 +23,7 @@ jobs:
             ls -l
             echo begin build script
             chmod +x build-RPMs-OpenSSH-CentOS.sh
-            ./build-RPMs-OpenSSH-CentOS.sh --version 9.8p1 --output_rpm_dir /rpmoutput
+            ./build-RPMs-OpenSSH-CentOS.sh --version 9.8p1 --output_rpm_dir /rpmoutput --upgrade_now n
             echo end build script
 
       - name: Upload App To Artifact
