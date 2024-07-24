@@ -49,7 +49,9 @@ build_RPMs() {
     local output_rpm_dir="${1}"
     if [[ $(rpm --eval '%{centos_ver}') = 8 ]]; then
         dnf install -y dnf-plugins-core epel-release
-        dnf install -y pam-devel rpm-build rpmdevtools zlib-devel openssl-devel krb5-devel gcc wget libX11-devel gtk2-devel libXt-devel perl perl-devel imake
+        dnf install -y pam-devel rpm-build rpmdevtools
+        dnf install -y zlib-devel openssl-devel krb5-devel gcc wget
+        dnf install -y libX11-devel gtk2-devel libXt-devel perl perl-devel imake
     else
         yum install -y pam-devel rpm-build rpmdevtools zlib-devel openssl-devel krb5-devel gcc wget libx11-dev gtk2-devel libXt-devel imake
     fi
