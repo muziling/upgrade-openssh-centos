@@ -26,8 +26,14 @@ jobs:
             ./build-RPMs-OpenSSH-CentOS.sh --version 9.8p1 --output_rpm_dir /rpmoutput --upgrade_now n
             echo end build script
 
-      - name: Upload App To Artifact
+      - name: Upload rpm tar To Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: opensshrpm
+          name: opensshrpmtar
           path: /rpmoutput
+
+      - name: Upload rpms To Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: opensshrpms
+          path: /root/rpmbuild/RPMS
