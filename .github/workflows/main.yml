@@ -31,9 +31,3 @@ jobs:
         with:
           name: opensshrpmtar
           path: /rpmoutput
-
-      - name: Upload rpms To Artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: opensshrpms
-          path: /root/rpmbuild/RPMS
