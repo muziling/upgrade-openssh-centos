@@ -63,7 +63,7 @@ build_RPMs() {
         dnf install -y libXt-devel perl perl-devel
         aarch=$(arch)
         echo $aarch
-        wget https://repo.almalinux.org/almalinux/8/PowerTools/aarch64/os/Packages/imake-1.0.7-11.el8.$aarch.rpm
+        wget https://repo.almalinux.org/almalinux/8/PowerTools/$aarch/os/Packages/imake-1.0.7-11.el8.$aarch.rpm
         dnf localinstall imake-1.0.7-11.el8.$aarch.rpm -y
     else
         yum install -y pam-devel rpm-build rpmdevtools zlib-devel openssl-devel krb5-devel gcc wget libx11-dev gtk2-devel libXt-devel imake
