@@ -1,0 +1,33 @@
+name: openssh
+
+on:
+  workflow_dispatch:
+    inputs:
+      distro:
+        description: 'distro'
+        required: true
+        type: choice
+        options:
+        - 'centos8'
+        - 'centos7'
+
+jobs:
+  amd64_job:
+    runs-on: ubuntu-latest
+    container: centos:${{ inputs.distro }}
+    steps:
+      - name: Initialization environment
+        run: |
+            curl https://raw.githubusercontent.com/muziling/upgrade-openssh-centos/master/build-RPMs-OpenSSH-CentOS.sh -o build-RPMs-OpenSSH-CentOS.sh
+            ls -l
+            echo begin build script
+            echo ${{ github.workspace }}/output
+            chmod +x build-RPMs-OpenSSH-CentOS.sh
+            ./build-RPMs-OpenSSH-CentOS.sh --version 9.8p1 --output_rpm_dir ${{ github.workspace }}/output --upgrade_now n
+            echo end build script
+
+      - name: Upload rpm tar To Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: opensshrpmtar
+          path: ${{ github.workspace }}/output
