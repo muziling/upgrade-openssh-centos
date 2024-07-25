@@ -89,8 +89,13 @@ build_RPMs() {
 
     rpmbuild -ba openssh.spec
     aarch=$(arch)
+    echo aaaaaaaaaaaaa
+    echo $aarch
+    echo $output_rpm_dir
     cd /root/rpmbuild/RPMS/$aarch/
+    ls -l
     tar zcvf ${output_rpm_dir}/openssh-${version}-RPMs.el${rhel_version}.tar.gz openssh*
+    ls -l ${output_rpm_dir}
     rm -rf ~/rpmbuild ~/openssh-${version}
 }
 
