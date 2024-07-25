@@ -2,6 +2,21 @@ name: openssh
 
 on:
   workflow_dispatch:
+    inputs:
+      arch:
+        description: 'arch'
+        required: true
+        type: choice
+        options:
+        - 'aarch64'
+        - 'x86_64'
+      distro:
+        description: 'distro'
+        required: true
+        type: choice
+        options:
+        - 'centos8'
+        - 'centos7'
 
 jobs:
   armv8_job:
@@ -13,8 +28,8 @@ jobs:
         name: Run commands
         id: runcmd
         with:
-          arch: aarch64
-          distro: centos8
+          arch: ${{ inputs.arch }}
+          distro: ${{ inputs.distro }}
 
           # Set an output parameter `uname` for use in subsequent steps
           run: |
