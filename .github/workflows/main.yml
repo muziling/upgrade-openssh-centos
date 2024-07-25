@@ -9,7 +9,6 @@ on:
         type: choice
         options:
         - 'aarch64'
-        - 'x86_64'
       distro:
         description: 'distro'
         required: true
