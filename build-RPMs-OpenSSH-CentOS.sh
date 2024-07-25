@@ -94,7 +94,7 @@ build_RPMs() {
     echo aaaaaaaaaaaaa
     echo $aarch
     echo $output_rpm_dir
-    cd /root/rpmbuild/RPMS/$aarch/
+    cd $HOME/rpmbuild/RPMS/$aarch/
     ls -l
     tar zcvf ${output_rpm_dir}/openssh-${version}-RPMs.el${rhel_version}.tar.gz openssh*
     ls -l ${output_rpm_dir}
