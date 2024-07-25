@@ -73,7 +73,9 @@ build_RPMs() {
     wget --no-check-certificate -c https://cloudflare.cdn.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-${version}.tar.gz
     wget --no-check-certificate -c https://cloudflare.cdn.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-${version}.tar.gz.asc
     wget --no-check-certificate -c https://src.fedoraproject.org/repo/pkgs/openssh/x11-ssh-askpass-1.2.4.1.tar.gz/md5/8f2e41f3f7eaa8543a2440454637f3c3/x11-ssh-askpass-1.2.4.1.tar.gz
-
+    wget --no-check-certificate -c https://www.openssl.org/source/openssl-3.0.14.tar.gz
+    wget --no-check-certificate -c https://www.cpan.org/src/5.0/perl-5.38.2.tar.gz
+    
     tar zxvf openssh-${version}.tar.gz
     yes | cp /etc/pam.d/sshd openssh-${version}/contrib/redhat/sshd.pam
     mv openssh-${version}.tar.gz{,.orig}
@@ -88,8 +90,16 @@ build_RPMs() {
     sed -i -e "s/PreReq: initscripts >= 5.00/#PreReq: initscripts >= 5.00/g" openssh.spec
     sed -i -e "s/BuildRequires: openssl-devel < 1.1/#BuildRequires: openssl-devel < 1.1/g" openssh.spec
     sed -i -e "/check-files/ s/^#*/#/" /usr/lib/rpm/macros
-
-    rpmbuild -ba openssh.spec
+    # https://github.com/muziling/openssh-rpms/blob/main/version.env
+    rpmbuild -ba openssh.spec \
+		--define "opensslver 3.0.14" \
+		--define "opensshver 9.8p1" \
+		--define "opensshpkgrel 1" \
+		--define "perlver 5.38.2" \
+		--define 'no_gtk2 1' \
+		--define 'skip_gnome_askpass 1' \
+		--define 'skip_x11_askpass 1'
+  
     aarch=$(arch)
     echo aaaaaaaaaaaaa
     echo $aarch
