@@ -218,7 +218,7 @@ environment.
 %if ! %{no_build_openssl}
 %define openssl_dir %{_builddir}/%{name}-%{version}/openssl
 mkdir -p openssl
-tar xfz %{SOURCE3} --strip-components=1 -C openssl
+tar xfz %{SOURCE2} --strip-components=1 -C openssl
 pushd openssl
 ./config shared zlib -fPIC
 make %{?_smp_mflags}
@@ -308,8 +308,8 @@ install -m644 contrib/ssh-copy-id.1 $RPM_BUILD_ROOT%{_mandir}/man1/
 install -d $RPM_BUILD_ROOT/etc/pam.d/
 install -d $RPM_BUILD_ROOT/etc/rc.d/init.d
 install -d $RPM_BUILD_ROOT%{_libexecdir}/openssh
-# Using custom PAM file
-install -m644 %{SOURCE2}     $RPM_BUILD_ROOT/etc/pam.d/sshd
+
+install -m644 contrib/redhat/sshd.pam  $RPM_BUILD_ROOT/etc/pam.d/sshd
 install -m755 contrib/redhat/sshd.init $RPM_BUILD_ROOT/etc/rc.d/init.d/sshd
 
 %if ! %{no_x11_askpass}
