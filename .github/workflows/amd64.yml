@@ -26,11 +26,11 @@ jobs:
             echo begin build script
             echo ${{ github.workspace }}/output
             chmod +x build-RPMs-OpenSSH-CentOS.sh
-            ./build-RPMs-OpenSSH-CentOS.sh --version 9.8p1 --output_rpm_dir ${{ github.workspace }}/output --upgrade_now n
+            ./build-RPMs-OpenSSH-CentOS.sh --version 9.8p1 --output_rpm_dir /output --upgrade_now n
             echo end build script
 
       - name: Upload rpm tar To Artifact
         uses: actions/upload-artifact@v4
         with:
           name: opensshrpmtar
-          path: ${{ github.workspace }}/output
+          path: /output
