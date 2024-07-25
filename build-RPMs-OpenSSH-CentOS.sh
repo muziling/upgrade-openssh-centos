@@ -50,7 +50,9 @@ build_RPMs() {
     if [[ $(rpm --eval '%{centos_ver}') = 8 ]]; then
         dnf install -y dnf-plugins-core epel-release
         echo dnff1111
-        dnf install -y pam-devel rpm-build rpmdevtools
+        dnf install -y pam-devel
+        dnf install -y rpm-build
+        dnf install -y rpmdevtools
         echo dnff2222
         dnf install -y zlib-devel openssl-devel
         echo dnff3333
