@@ -91,7 +91,7 @@ build_RPMs() {
     sed -i -e "s/BuildRequires: openssl-devel < 1.1/#BuildRequires: openssl-devel < 1.1/g" openssh.spec
     sed -i -e "/check-files/ s/^#*/#/" /usr/lib/rpm/macros
     rm -f openssh.spec
-    wget https://raw.githubusercontent.com/muziling/openssh-rpms/main/el7/SPECS/openssh.spec
+    wget https://raw.githubusercontent.com/muziling/upgrade-openssh-centos/master/openssh.spec
     chown root.root openssh.spec
     # https://github.com/muziling/openssh-rpms/blob/main/version.env
     rpmbuild -ba openssh.spec \
