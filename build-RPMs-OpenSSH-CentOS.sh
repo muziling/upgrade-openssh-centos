@@ -96,8 +96,8 @@ build_RPMs() {
     chown root.root openssh.spec
     # https://github.com/muziling/openssh-rpms/blob/main/version.env
     rpmbuild -ba openssh.spec \
-		--define "opensslver 3.0.14" \
-		--define "opensshver 9.8p1" \
+		--define "opensslver 3.4.0" \
+		--define "opensshver 9.9p1" \
 		--define "opensshpkgrel 1" \
 		--define "perlver 5.38.2" \
 		--define 'no_gtk2 1' \
