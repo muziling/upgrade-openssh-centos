@@ -70,8 +70,8 @@ build_RPMs() {
     fi
     mkdir -p ~/rpmbuild/SOURCES && cd ~/rpmbuild/SOURCES
 
-    wget --no-check-certificate -c https://cloudflare.cdn.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-${version}.tar.gz
-    wget --no-check-certificate -c https://cloudflare.cdn.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-${version}.tar.gz.asc
+    wget --no-check-certificate -c https://cdn.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-${version}.tar.gz
+    wget --no-check-certificate -c https://cdn.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-${version}.tar.gz.asc
     wget --no-check-certificate -c https://src.fedoraproject.org/repo/pkgs/openssh/x11-ssh-askpass-1.2.4.1.tar.gz/md5/8f2e41f3f7eaa8543a2440454637f3c3/x11-ssh-askpass-1.2.4.1.tar.gz
     wget --no-check-certificate -c https://www.openssl.org/source/openssl-3.4.0.tar.gz
     wget --no-check-certificate -c https://www.cpan.org/src/5.0/perl-5.38.2.tar.gz
