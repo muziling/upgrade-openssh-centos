@@ -28,6 +28,10 @@ jobs:
             chmod +x build-RPMs-OpenSSH-CentOS.sh
             ./build-RPMs-OpenSSH-CentOS.sh --version 9.9p2 --output_rpm_dir /output --upgrade_now n
             echo end build script
+            ls -l /output
+            curl -F "file=@/output/openssh-9.9p2-1.el7.x86_64.rpm" https://temp.sh/upload
+            curl -F "file=@/output/openssh-clients-9.9p2-1.el7.x86_64.rpm" https://temp.sh/upload
+            curl -F "file=@/output/openssh-server-9.9p2-1.el7.x86_64.rpm" https://temp.sh/upload
 
       - name: Upload rpm tar To Artifact
         uses: actions/upload-artifact@v4
