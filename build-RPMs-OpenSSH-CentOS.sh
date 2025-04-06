@@ -56,7 +56,7 @@ build_RPMs() {
         echo dnff2222
         dnf install -y zlib-devel openssl-devel
         echo dnff3333
-        dnf install -y krb5-devel gcc wget
+        dnf install -y krb5-devel gcc make wget
         echo dnff4444
         dnf install -y libX11-devel gtk2-devel
         echo dnff5555
@@ -66,7 +66,7 @@ build_RPMs() {
         wget https://repo.almalinux.org/almalinux/8/PowerTools/$aarch/os/Packages/imake-1.0.7-11.el8.$aarch.rpm
         dnf localinstall imake-1.0.7-11.el8.$aarch.rpm -y
     else
-        yum install -y pam-devel rpm-build rpmdevtools zlib-devel openssl-devel krb5-devel gcc wget libx11-dev gtk2-devel libXt-devel imake perl-IPC-Cmd
+        yum install -y pam-devel rpm-build rpmdevtools zlib-devel openssl-devel krb5-devel gcc make wget libx11-dev gtk2-devel libXt-devel imake perl-IPC-Cmd
     fi
     mkdir -p ~/rpmbuild/SOURCES && cd ~/rpmbuild/SOURCES
 
