@@ -73,7 +73,7 @@ build_RPMs() {
     wget --no-check-certificate -c https://cdn.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-${version}.tar.gz
     wget --no-check-certificate -c https://cdn.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-${version}.tar.gz.asc
     wget --no-check-certificate -c https://src.fedoraproject.org/repo/pkgs/openssh/x11-ssh-askpass-1.2.4.1.tar.gz/md5/8f2e41f3f7eaa8543a2440454637f3c3/x11-ssh-askpass-1.2.4.1.tar.gz
-    wget --no-check-certificate -c https://www.openssl.org/source/openssl-3.4.0.tar.gz
+    wget --no-check-certificate -c https://www.openssl.org/source/openssl-3.4.1.tar.gz
     wget --no-check-certificate -c https://www.cpan.org/src/5.0/perl-5.38.2.tar.gz
     
     tar zxvf openssh-${version}.tar.gz
@@ -96,8 +96,8 @@ build_RPMs() {
     chown root.root openssh.spec
     # https://github.com/muziling/openssh-rpms/blob/main/version.env
     rpmbuild -ba openssh.spec \
-		--define "opensslver 3.4.0" \
-		--define "opensshver 9.9p1" \
+		--define "opensslver 3.4.1" \
+		--define "opensshver ${version}" \
 		--define "opensshpkgrel 1" \
 		--define "perlver 5.38.2" \
 		--define 'no_gtk2 1' \
