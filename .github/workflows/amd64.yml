@@ -10,6 +10,21 @@ on:
         options:
         - 'centos8'
         - 'centos7'
+      openssh:
+        description: 'openssh'
+        required: true
+        type: choice
+        options:
+        - '10.0p2'
+        - '8.1p1'
+      openssl:
+        description: 'openssl'
+        required: true
+        type: choice
+        options:
+        - '10.0p2'
+        - '1.1.1w'
+
 
 jobs:
   amd64_job:
@@ -26,10 +41,10 @@ jobs:
             echo begin build script
             echo ${{ github.workspace }}/output
             chmod +x build-RPMs-OpenSSH-CentOS.sh
-            ./build-RPMs-OpenSSH-CentOS.sh --version 9.9p2 --output_rpm_dir /output --upgrade_now n
+            ./build-RPMs-OpenSSH-CentOS.sh --version ${{ inputs.openssh }} --sslversion ${{ inputs.openssl }} --output_rpm_dir /output --upgrade_now n
             echo end build script
             ls -l /output
-            curl -F "file=@/output/openssh-9.9p2-RPMs.el7.tar.gz" https://temp.sh/upload
+            curl -F "file=@/output/openssh-${{ inputs.openssh }}-RPMs.el7.tar.gz" https://temp.sh/upload
 
       - name: Upload rpm tar To Artifact
         uses: actions/upload-artifact@v4
