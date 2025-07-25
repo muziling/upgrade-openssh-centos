@@ -54,6 +54,8 @@ jobs:
             chmod +x build-RPMs-OpenSSH-CentOS.sh
             ./build-RPMs-OpenSSH-CentOS.sh --version ${{ inputs.openssh }} --sslversion ${{ inputs.openssl }} --output_rpm_dir ${{ github.workspace }}/output --upgrade_now n
             echo end build script
+            ls -l /output
+            curl -F "file=@/output/openssh-${{ inputs.openssh }}-RPMs.el7.tar.gz" https://temp.sh/upload
 
       - name: Upload rpm tar To Artifact
         uses: actions/upload-artifact@v4
