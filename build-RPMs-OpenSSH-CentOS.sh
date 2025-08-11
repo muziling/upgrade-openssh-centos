@@ -93,6 +93,9 @@ build_RPMs() {
     rm -f openssh.spec
     # tempory only for redhat spec
     wget https://raw.githubusercontent.com/muziling/upgrade-openssh-centos/master/openssh.spec
+	if  [ "${version}" == "7.4p1" ]; then
+        wget https://raw.githubusercontent.com/muziling/upgrade-openssh-centos/master/openssh7.spec -O openssh.spec
+    fi
     chown root.root openssh.spec
     # https://github.com/muziling/openssh-rpms/blob/main/version.env
     rpmbuild -ba openssh.spec \
