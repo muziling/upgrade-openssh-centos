@@ -22,6 +22,7 @@ on:
         type: choice
         options:
         - '10.0p2'
+        - '9.9p2'
         - '8.1p1'
         - '7.4p1'
       openssl:
