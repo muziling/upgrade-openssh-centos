@@ -23,6 +23,7 @@ on:
         options:
         - '10.0p2'
         - '8.1p1'
+        - '7.4p1'
       openssl:
         description: 'openssl'
         required: true
@@ -30,6 +31,7 @@ on:
         options:
         - '10.0p2'
         - '1.1.1w'
+        - '1.0.2u'
 
 jobs:
   armv8_job:
