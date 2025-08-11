@@ -157,6 +157,11 @@ main() {
             shift
             shift || break
             ;;
+        --sslversion)
+            sslversion="$2"
+            shift
+            shift || break
+            ;;
         --output_rpm_dir)
             output_rpm_dir="$2"
             shift
