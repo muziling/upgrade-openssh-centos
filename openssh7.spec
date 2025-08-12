@@ -20,10 +20,10 @@
 %define aversion 1.2.4.1
 
 # Do we want to disable building of x11-askpass? (1=yes 0=no)
-%define no_x11_askpass 0
+%define no_x11_askpass 1
 
 # Do we want to disable building of gnome-askpass? (1=yes 0=no)
-%define no_gnome_askpass 0
+%define no_gnome_askpass 1
 
 # Do we want to link against a static libcrypto? (1=yes 0=no)
 %define static_libcrypto 0
@@ -185,6 +185,7 @@ an X11 passphrase dialog for OpenSSH and the GNOME GUI desktop
 environment.
 
 %prep
+%global debug_package %{nil}
 
 %if ! %{no_x11_askpass}
 %setup -q -a 1
