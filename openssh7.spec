@@ -87,6 +87,7 @@ URL: https://www.openssh.com/portable.html
 Source0: https://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-%{version}.tar.gz
 %if ! %{no_x11_askpass}
 Source1: http://www.jmknoble.net/software/x11-ssh-askpass/x11-ssh-askpass-%{aversion}.tar.gz
+%endif
 %if ! %{no_build_openssl}
 Source2: https://www.openssl.org/source/openssl-%{opensslver}.tar.gz
 %endif
