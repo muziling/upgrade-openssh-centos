@@ -96,7 +96,7 @@ build_RPMs() {
 	if  [ "${version}" == "7.4p1" ]; then
         wget https://raw.githubusercontent.com/muziling/upgrade-openssh-centos/master/openssh7.spec -O openssh.spec
     fi
-	if  [ "${version}" == "10.0p1" ]; then
+	if  [ "${version}" == "10.0p2" ]; then
         wget https://raw.githubusercontent.com/muziling/upgrade-openssh-centos/master/openssh10.spec -O openssh.spec
     fi
     chown root.root openssh.spec
