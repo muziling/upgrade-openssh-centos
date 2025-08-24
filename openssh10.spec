@@ -9,7 +9,7 @@
 #if defined openssl_dir, don't build it
 %{?openssl_dir:%global no_build_openssl 1}
 
-%global ver 10.0p1
+%global ver %{?opensshver}
 %global rel 1%{?dist}
 
 # OpenSSH privilege separation requires a user & group ID
