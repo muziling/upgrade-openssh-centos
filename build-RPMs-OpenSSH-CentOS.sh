@@ -77,6 +77,7 @@ build_RPMs() {
     wget --no-check-certificate -c https://www.cpan.org/src/5.0/perl-5.38.2.tar.gz
     
     tar zxvf openssh-${version}.tar.gz
+	[[ -d openssh-10.0p1 ]] && mv openssh-10.0p1 openssh-${version}
     yes | cp /etc/pam.d/sshd openssh-${version}/contrib/redhat/sshd.pam
     mv openssh-${version}.tar.gz{,.orig}
     tar zcpf openssh-${version}.tar.gz openssh-${version}
